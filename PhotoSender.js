@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import { StyleSheet, ImageBackground, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import  AsyncStorage from '@react-native-community/async-storage';
 
 export default class PhotoSenderComponent extends Component {
   
+  state = {
+    address: null
+  }
+
   static navigationOptions = {
     header: null
   }
+
+  componentDidMount() {
+    this.readServerIP();
+  }
+
+  readServerIP = async () => {
+    try {
+        const val = await AsyncStorage.getItem("address");
+        if (val != null) {
+            await this.setState({address: val});
+            AsyncStorage.flushGetRequests();
+        }
+    } catch (error) {
+        alert(error.message);
+    }
+    console.log(this.state.address);
+  };
 
   render() {
     const photo = this.props.navigation.getParam('photo');
@@ -26,7 +48,7 @@ export default class PhotoSenderComponent extends Component {
   sendPicture = () => {
     imageBody = this.props.navigation.getParam('photo');
     formData = this.createFormData(imageBody);
-    fetch("http://192.168.1.9:3000/api/upload", {
+    fetch("http://" + this.state.address + ":3000/api/upload", {
       method: "POST",
       body: formData
     })

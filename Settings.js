@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SettingHeader, SettingComponent } from './SettingElements';
-import Dialog from "react-native-dialog";
+import DialogInput from "react-native-dialog-input";
 
 export default class SettingsComponent extends Component {
   
@@ -23,22 +23,19 @@ export default class SettingsComponent extends Component {
     return (
       <View style={styles.container}>
         <SettingHeader text='Server'/>
-        <SettingComponent 
-          mainText='Server address' 
-          subText={this.state.address} 
-          onPress={this.showAddressDialog}
-          iconName='md-at'
-          iconType='ionicon'/>
+        <SettingComponent mainText='Server address' 
+                          subText={this.state.address} 
+                          onPress={this.showAddressDialog}
+                          iconName='md-at'
+                          iconType='ionicon'/>
 
-          <Dialog.Container visible={this.state.dialogVisible}>
-            <Dialog.Title>Change server address</Dialog.Title>
-            <Dialog.Description>
-              Please enter server address.
-            </Dialog.Description>
-            <Dialog.Input></Dialog.Input>
-            <Dialog.Button label="Cancel" onPress={this.handleAddressSubmit} />
-            <Dialog.Button label="Ok" onPress={this.handleAddressCancel} />
-        </Dialog.Container>
+          <DialogInput isDialogVisible={this.state.dialogVisible}
+                      title={"Change server address"}
+                      message={"Please enter new address of the server"}
+                      initValueTextInput={this.state.address}
+                      submitInput={ (inputText) => { this.handleAddressSubmit(inputText) } }
+                      closeDialog={ () => {this.handleAddressCancel()}}>
+          </DialogInput>
       </View>
     );
   }
@@ -47,7 +44,8 @@ export default class SettingsComponent extends Component {
     this.setState({ dialogVisible: true});
   }
 
-  handleAddressSubmit = () => {
+  handleAddressSubmit = (newAddress) => {
+    this.setState({ address: newAddress})
     this.setState({ dialogVisible: false});
   }
 

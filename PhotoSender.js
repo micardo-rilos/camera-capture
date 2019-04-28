@@ -35,10 +35,16 @@ export default class PhotoSenderComponent extends Component {
     return (
         <ImageBackground style={styles.container} source={{ uri : photo.uri }}>
           <View style={styles.upper}>
-            <Icon size={50} name="md-arrow-back" type="ionicon" color="white" onPress={() => this.props.navigation.goBack()}/>
+            <Icon size={50} 
+                  name="md-arrow-back" type="ionicon" 
+                  color="white" underlayColor='transparent'
+                  onPress={() => this.props.navigation.goBack()}/>
           </View>
           <View style={styles.lower}>
-              <Icon size={50} name="md-checkmark" type="ionicon" color="white" onPress={this.sendPicture}/>
+              <Icon size={50} 
+                    name="md-checkmark" type="ionicon" 
+                    color="white" underlayColor='transparent' 
+                    onPress={this.sendPicture}/>
           </View>
         </ImageBackground>
     );

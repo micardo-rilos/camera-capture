@@ -29,7 +29,7 @@ class MainComponent extends Component {
           captureAudio={false}>
 
           <View style={styles.upper}>
-            <Icon size={40} name='md-images' type='ionicon' color='white' onPress={this.handleChoosePhoto} />
+            <Icon size={40} name='md-images' type='ionicon' color='white' underlayColor='transparent' onPress={this.handleChoosePhoto} />
             <Icon size={40} name='md-reverse-camera' type='ionicon' color='white' onPress={this.changeCamera}/>
             <Icon size={40} name='md-settings' type='ionicon' color='white' onPress={() => this.props.navigation.navigate('Settings')}/>
           </View>

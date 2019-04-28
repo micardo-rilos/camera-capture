@@ -27,7 +27,6 @@ export default class PhotoSenderComponent extends Component {
     } catch (error) {
         alert(error.message);
     }
-    console.log(this.state.address);
   };
 
   render() {

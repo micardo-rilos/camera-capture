@@ -44,12 +44,9 @@ class MainComponent extends Component {
   }
 
   changeCamera = () => {
-    if(this.state.cameraType === RNCamera.Constants.Type.back) {
-      this.setState({cameraType : RNCamera.Constants.Type.front});
-    }
-    else {
-      this.setState({cameraType : RNCamera.Constants.Type.back});
-    }
+    this.setState((previousState) => (
+      { cameraType: (previousState.cameraType === RNCamera.Constants.Type.back) ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back })
+    );
   }
 
   handleChoosePhoto = () => {

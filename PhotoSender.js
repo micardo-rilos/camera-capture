@@ -3,8 +3,6 @@ import { StyleSheet, ImageBackground, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import  AsyncStorage from '@react-native-community/async-storage';
 
-import Svg,{ Rect } from 'react-native-svg';
-
 export default class PhotoSenderComponent extends Component {
   
   state = {
@@ -34,12 +32,6 @@ export default class PhotoSenderComponent extends Component {
   render() {
     const photo = this.props.navigation.getParam('photo');
 
-    const samplePolygon = (
-    <Svg height="100" width="100">
-    <Rect x="15" y="15" width="70" height="70" stroke="red" strokeWidth="2" fill="yellow"/>
-    </Svg>
-    ); 
-
     return (
         <ImageBackground style={styles.container} source={{ uri : photo.uri }}>
           <View style={styles.upper}>
@@ -47,9 +39,6 @@ export default class PhotoSenderComponent extends Component {
                   name="md-arrow-back" type="ionicon" 
                   color="white" underlayColor='transparent'
                   onPress={() => this.props.navigation.goBack()}/>
-          </View>
-          <View>
-            { samplePolygon }
           </View>
           <View style={styles.lower}>
               <Icon size={50} 
@@ -76,8 +65,16 @@ export default class PhotoSenderComponent extends Component {
     //     alert(error);        
     //   });
 
-    this.props.isPhotoSent = true;
-    this.forceUpdate();
+    let mockJSONparams = {
+      svgH : "100",
+      svgW : "100",
+      width: "75",
+      height: "75",
+      x: "15",
+      y: "15"
+    }
+
+    this.props.navigation.navigate('SamplePolygon', { photo: imageBody, polyData : mockJSONparams });
   }
 
   createFormData = (photo) => {
@@ -94,20 +91,20 @@ export default class PhotoSenderComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: "column",
-      justifyContent: "space-between",
-      alignItems: "stretch"
-    },
-    lower : {
-      margin: 20,
-      flexDirection: "row",
-      justifyContent: "flex-end"
-    },
-    upper : {
-      margin: 20,
-      flexDirection: "row",
-      justifyContent: "flex-start"
-    }
-  });
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "stretch"
+  },
+  lower : {
+    margin: 20,
+    flexDirection: "row",
+    justifyContent: "flex-end"
+  },
+  upper : {
+    margin: 20,
+    flexDirection: "row",
+    justifyContent: "flex-start"
+  }
+});

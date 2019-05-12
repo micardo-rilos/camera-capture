@@ -6,6 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import PhotoSenderComponent from './PhotoSender';
 import SettingsComponent from './Settings';
+import SamplePolygon from './SamplePolygon';
 
 class MainComponent extends Component {
 
@@ -116,7 +117,8 @@ const AppNavigator = createStackNavigator(
   {
     Main: MainComponent,
     PhotoSender : PhotoSenderComponent,
-    Settings : SettingsComponent
+    Settings : SettingsComponent,
+    SamplePolygon : SamplePolygon
   }
 );
 
